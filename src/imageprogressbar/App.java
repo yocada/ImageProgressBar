@@ -37,34 +37,14 @@ public class App {
 			System.exit(0);
 		}
 		
-		
-		BufferedImage img = new BufferedImage(ancho, alto, BufferedImage.TYPE_4BYTE_ABGR);
-		for (int i = 0; i < img.getWidth(); i++) {
-			for (int j = 0; j < img.getHeight(); j++) {
-				int a = 255; //alpha
-		        int r; //red
-		        int g; //green
-		        int b; //blue
-		        if (i == 0 || i == img.getWidth()-1 || j == 0 || j == img.getHeight()-1) {
-		        	r=0;g=0;b=0;
-		        }else {
-		        	if ((float)i / ((float)img.getWidth()-1) <= (porcentaje / 100)) {
-		        		r=255;g=165;b=0;
-		        	}else {
-		        		r=255;g=255;b=255;
-		        	}
-		        }
-		        int p = (a<<24) | (r<<16) | (g<<8) | b; //pixel
-				img.setRGB(i, j, p);
-			}
+		ImageProgressBar bProgreso = new ImageProgressBar();
+		bProgreso.setColors(ImageProgressBar.Color.BLANCO, ImageProgressBar.Color.NEGRO, ImageProgressBar.Color.NARANJA);
+		bProgreso.setImage(ancho, alto, BufferedImage.TYPE_4BYTE_ABGR, porcentaje);
+		if (bProgreso.getImageFile("imageProgressBarXXX.png")) {
+			System.out.println("Imagen generada corréctamente.");
+		}else {
+			System.out.println("No se ha podido generar la imagen corréctamente.");
 		}
-		try {
-			File f = new File("imageProgressBar.png");
-			ImageIO.write(img,"png",f);
-		}catch(IOException ex) {
-			System.out.println("No se ha podido generar la imagen corréctamente: " + ex.getMessage());
-		}
-		System.out.println("Imagen generada corréctamente");
 	}
 
 }
