@@ -10,12 +10,15 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dcm.imageprogressbar.ImageProgressBar;
+
 
 @RestController
 @RequestMapping("imageprogressbar")
@@ -26,8 +29,12 @@ public class ImageProgressBarREST {
 		return "Test OK!";
 	}
 
-	@GetMapping(value = "download", produces = MediaType.IMAGE_PNG_VALUE)
-	public @ResponseBody byte[] getImageWithMediaType() throws IOException {
+	//@GetMapping(value = "download", produces = MediaType.IMAGE_PNG_VALUE)
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping(value = "download")
+	public ResponseEntity<ImgTest> getImageWithMediaType() throws IOException {
+	//public @ResponseBody byte[] getImageWithMediaType() throws IOException {
 		//TEST
 		//Comprobación de parámetros
 //		if (args.length != 3) {
@@ -69,6 +76,15 @@ public class ImageProgressBarREST {
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		ImageIO.write(buffImage, "png", os);
 		InputStream is = new ByteArrayInputStream(os.toByteArray());
-		return IOUtils.toByteArray(is);
+//		return IOUtils.toByteArray(is);
+		var imagenTest = new ImgTest();
+		imagenTest.Image = IOUtils.toByteArray(is);
+		return ResponseEntity.ok(imagenTest);
+	}
+	
+	private class ImgTest{
+		public byte[] Image;
 	}
 }
+
+
