@@ -10,6 +10,6 @@ export class ImageserverService {
 
   getData(){
     // return 'https://cdn.eso.org/images/thumb700x/eso1907a.jpg';
-    return this.http.get('http://localhost:8080/imageprogressbar/download');
+    return this.http.get('http://inserlan-pc:8080/imageprogressbar/get');
   }
 }

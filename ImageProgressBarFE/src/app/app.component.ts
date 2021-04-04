@@ -22,7 +22,7 @@ export class AppComponent {
 
     this.imageServer.getData().subscribe((res: any)=>{
       // this.imagen = res;
-      let objectURL = 'data:image/png;base64,' + res.Image;
+      let objectURL = 'data:image/png;base64,' + res.image;
 
          this.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     })
