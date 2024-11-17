@@ -1,0 +1,17 @@
+<img [src]='imagen != null ? imagen : noimagen' alt="noimage">
+
+<form class="col-lg-6 offset-lg-3 ">
+    <div class="form-group">
+      <label for="ancho">Ancho de la imagen</label>
+      <input #ancho type="text" class="form-control" id="ancho" aria-describedby="ancho" placeholder="Ancho">
+    </div>
+    <div class="form-group">
+        <label for="alto">Alto de la imagen</label>
+        <input #alto type="text" class="form-control" id="alto" aria-describedby="alto" placeholder="Alto">
+    </div>
+    <div class="form-group">
+        <label for="porcentaje">Porcentaje de progreso</label>
+        <input #porcentaje type="text" class="form-control" id="porcentaje" aria-describedby="porcentaje" placeholder="Porcentaje">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="getImage(ancho.value,alto.value,porcentaje.value)">Generar imagen</button>
+  </form>
